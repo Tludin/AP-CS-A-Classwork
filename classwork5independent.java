@@ -18,6 +18,7 @@ public class classwork5independent
        double playerHP = 20;
        double banditHP = 15;
        boolean shieldBash = false;
+       
        if(input.equals("sneak")){
            System.out.println("'Never should have come here' says the bandit, the bandit attacks you!");
            while (gameMode == true){
@@ -102,7 +103,14 @@ public class classwork5independent
        } else if(input.equals("attack")) {
            System.out.println("You charge the bandit, he seems suprised!");
            while (gameMode == true){
-               System.out.println("You may now attack the bandit, do you try and hit their (leg) (head) or (chest)?");
+               System.out.println("You may now attack the bandit, Would you like to do a (shield) bash or cut with (sword)");
+               String attackMode = choice.nextLine();
+               System.out.println("Do you try and hit their (leg) (head) or (chest)?");
+               if(attackMode.equals("shield")){
+                   shieldBash = true;
+                } else if(attackMode.equals("sword")){
+                   shieldBash = false;
+                }
                double banditBlockNum  = (int)(Math.random()*3)+1;
                String playerAttack = choice.nextLine();
                if(banditBlockNum == 1){
@@ -115,8 +123,14 @@ public class classwork5independent
                 if(banditBlock.equals(playerAttack)){
                    System.out.println("The bandit blocked the attack!");
                 } else{
+                   if(shieldBash = false){
                    System.out.println("You hit the bandit!");
                    int damage = (int)(Math.random()*6)+1;
+                   banditHP = banditHP - damage;
+                   System.out.println("You dealt "+damage+" damage!");
+                   }else if(shieldBash = true){
+                    System.out.println("You hit the bandit!");
+                   int damage = (int)(Math.random()*3)+1;
                    banditHP = banditHP - damage;
                    System.out.println("You dealt "+damage+" damage!");
                 }
@@ -129,7 +143,7 @@ public class classwork5independent
                     gameMode = false;
                     return;
                 }
-                System.out.println("the bandit attacks you, Do block at your (leg) (head) or (chest)?");
+               System.out.println("the bandit attacks you, Do block at your (leg) (head) or (chest)?");
                double banditAttackNum  = (int)(Math.random()*3)+1;
                String playerDefence = choice.nextLine();
                if(banditAttackNum == 1){
@@ -143,10 +157,17 @@ public class classwork5independent
                    System.out.println("You blocked the attack!");
                    System.out.println("You have "+ playerHP +" HP");
                 } else{
-                   System.out.println("The bandit hit you in the " + banditAttack);
-                   int damage = (int)(Math.random()*6)+1;
-                   playerHP = playerHP - damage;
-                   System.out.println("You have "+ playerHP +" HP");
+                   if(shieldBash = false){
+                    System.out.println("The bandit hit you in the " + banditAttack);
+                    int damage = (int)(Math.random()*6)+1;
+                    playerHP = playerHP - damage;
+                    System.out.println("You have "+ playerHP +" HP");
+                    } else if(shieldBash = true){
+                    System.out.println("The bandit hit you in the " + banditAttack);
+                    int damage = (int)(Math.random()*3)+1;
+                    playerHP = playerHP - damage;
+                    System.out.println("You have "+ playerHP +" HP");
+                    }
                 }
                 if((playerHP <= 0)){
                     System.out.println("you are dead, the bandit killed you");
@@ -157,6 +178,7 @@ public class classwork5independent
                     gameMode = false;
                     return;
                 }
+            }
             }
        }
    }
