@@ -1,20 +1,22 @@
 
 /**
- * Write a description of class TOOMER here.
+ * Write a description of class detectTumor here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Tomas Ludin The |Magnificent|
+ * @version 0.1.0
  */
 public class TumorDetector
 {
     public static String detectTumor(int[][] patient, int[][] tumor){
         String analysis = "Possible tumors at ";
         for(int i = 0; i < (patient.length - tumor.length + 1); i++){
+            //System.out.println("Check");
             for(int j = 0; j < (patient[0].length - tumor[0].length + 1); j++){
+                //System.out.println("Check II");
                 int[][] scan = new int[tumor.length][tumor.length];
-                for(int q = i; q < (tumor.length); q++){
-                    for(int p = j; p < (tumor[0].length); p++){
-                        scan[p-j][q-i] = patient[p][q];
+                for(int q = 0; q < (tumor.length); q++){
+                    for(int p = 0; p < (tumor[0].length); p++){
+                        scan[p][q] = patient[p+j][q+i];
                     }
                 }
                 if(arrayEquals(scan, tumor) == true){
@@ -61,21 +63,20 @@ public class TumorDetector
         {0,0,0,0,0,0,0,1,1,1},{1,1,0,0,0,0,0,1,0,0},{0,1,0,1,0,0,1,1,1,1},{1,1,1,1,1,0,0,1,1,0},{0,0,0,0,0,0,0,0,0,0}
         ,{1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1}};
         int[][] joesTumor = new int[][]{{0,0,1,1},{0,0,1,0},{0,1,1,1},{0,0,1,1}};
-        for(int i = 0; i < joeEdmondoggScan.length; i++){
-            for(int j = 0; j < joeEdmondoggScan[0].length; j++){
-                System.out.print(joeEdmondoggScan[i][j]);
+        int[][] aTeamScan = new int[][]{{0,0,0,0,1,0},{0,0,0,0,1,1},{1,1,1,0,1,0},{0,1,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0}};
+        int[][] aTeamTumor = new int[][]{{0,1,0},{0,1,1},{0,1,0}};
+        for(int i = 0; i < aTeamScan.length; i++){
+            for(int j = 0; j < aTeamScan[0].length; j++){
+                System.out.print(aTeamScan[i][j]);
             }
             System.out.println();
         }
-        for(int i = 0; i < joesTumor.length; i++){
-            for(int j = 0; j < joesTumor[0].length; j++){
-                System.out.print(joesTumor[i][j]);
+        for(int i = 0; i < aTeamTumor.length; i++){
+            for(int j = 0; j < aTeamTumor[0].length; j++){
+                System.out.print(aTeamTumor[i][j]);
             }
             System.out.println();
         }
-        System.out.println(detectTumor(joeEdmondoggScan, joesTumor));
-        
-        
-        
+        System.out.println(detectTumor(aTeamScan, aTeamTumor));
     }
 }
